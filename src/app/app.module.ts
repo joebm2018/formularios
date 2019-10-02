@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+//importar modulo http
+import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FacturasComponent } from './components/facturas/facturas.component';
@@ -18,7 +19,8 @@ import { RUTAS } from './app.routes';
   ],
   imports: [
     BrowserModule,
-    RUTAS
+    RUTAS,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

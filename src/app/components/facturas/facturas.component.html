@@ -1,1 +1,37 @@
-<p>facturas works!</p>
+<!-- <span *ngIf="!facturas">Cargando ......</span>
+<span *ngIf="facturas">Llegaron las Facturas!!!!</span> -->
+
+
+<main class="container mt-5">
+    <div>
+        <div class="alert alert-success text-center" role="alert" *ngIf="!facturas">
+          <h4 class="alert-heading">Cargando ...</h4>
+          <p><i class="fa fa-refresh fa-3x fa-spin" aria-hidden="true"></i></p>
+          <p class="mb-0"></p>
+        </div>
+        <div *ngIf="facturas" class="animated slideInLeft">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Razon Social</th>
+                        <th>Numero</th>
+                        <th>Ruc</th>                        
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let f of facturas">
+                        <td>{{f.id}}</td>
+                        <td>{{f.fact_rz}}</td>
+                        <td>{{f.fact_nro}}</td>
+                        <td>{{f.fact_ruc}}</td>
+                        <td>{{f.fact_fech}}</td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
