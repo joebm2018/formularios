@@ -1,0 +1,61 @@
+<main class="container mt-5">
+    <section>
+        <h2 class="display-4">Crear Factura</h2>
+    </section>
+    <form class="mt-4 animated slideInLeft" #formulario="ngForm">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6">
+                    <label for="">Nro de Factura</label>
+                    <input type="text" class="form-control" required
+                        [(ngModel)]="objFactura.fact_nro"
+                        name="nro"
+                        placeholder="Ejm F001-00456">
+                </div>
+            </div>
+            
+                    
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="">Razon social</label>
+                    <input type="text" class="form-control" required
+                    [(ngModel)]="objFactura.fact_rz"
+                    name="rz"
+                    placeholder="Ejm Binario Consultores">
+                </div>
+
+            </div> 
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="">Fecha de Facturacion</label>
+                    <input type="date" class="form-control" required
+                        [(ngModel)]="objFactura.fact_fech"
+                        name="fecha"
+                        >
+                </div>
+                <div class="col-md-6">
+                    <label for="">Ruc:</label>
+                    <input type="text" maxlength="11" minlength="11" class="form-control" required
+                        [(ngModel)]="objFactura.fact_ruc"
+                        name="ruc"
+                        placeholder="Ejm 204938299">
+                </div>
+            </div>   
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block btn-le btn-dark"
+                [disabled]="!formulario.valid">
+                <i class="fas fa-save    "></i>
+                Registrar Factura
+            </button>
+        </div>
+        
+    </form>
+
+</main>
