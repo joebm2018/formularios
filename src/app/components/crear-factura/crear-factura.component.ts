@@ -31,7 +31,12 @@ export class CrearFacturaComponent implements OnInit {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    this.subscriptor.unsubscribe();
+    try {
+      this.subscriptor.unsubscribe();
+    } catch (error) {
+      
+    }
+    
   }
 
 }
