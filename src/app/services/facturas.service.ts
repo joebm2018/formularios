@@ -5,11 +5,14 @@ import { Observable } from 'rxjs';
 
 import { URL_BACKEND} from '../../environments/environment.prod'
 
+import {forkJoin} from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class FacturasService {
 
+  arregloRespuestas:Array<any>=[];
   constructor(private _sHttp:HttpClient) { }
 
   getFacturas():Observable<any>{
@@ -31,8 +34,16 @@ export class FacturasService {
   putFactura(objFactura):Observable<any>{
     let objFacturaString=JSON.stringify(objFactura);
     let misHeaders=new HttpHeaders().set("Content-Type","application/json");
-    let idFactura=objFactura;
-    return this._sHttp.put(`${URL_BACKEND}/facturas/${idFactura}`,
+    
+    return this._sHttp.put(`${URL_BACKEND}/facturas/${objFactura.id}`,
                             objFacturaString,{headers:misHeaders});
+  }
+  deleteFacturas(arregloFacturas):Observable<any>{
+    arregloFacturas.forEach(factura=>{
+      const rpta=this._sHttp.delete(`${URL_BACKEND}/facturas/${factura.id}`);
+
+      this.arregloRespuestas.push(rpta);
+    });
+    return forkJoin(this.arregloRespuestas)
   }
 }
