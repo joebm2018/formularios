@@ -68,9 +68,24 @@ export class FacturasComponent implements OnInit,OnDestroy {
   }
   
   abrirModalEditar(id){
+    this._sFacturas.getFactura(id).subscribe((resultado)=>{
+      console.log(resultado);
+      this.objFactura.id=resultado.id;
+      this.objFactura.fact_nro=resultado.fact_nro;
+      this.objFactura.fact_fech=resultado.fact_fech;
+      this.objFactura.fact_ruc=resultado.fact_ruc;
+      this.objFactura.fact_rz=resultado.fact_rz;
 
-    console.log("hola");
+    })
+    $("#modalEditar").modal("show");
+  }
+  actualizarFactura(id){
+    console.log(`el id a modificar es: ${id}`);
     
-    $("#modalEditar").modal("show")
+    this._sFacturas.putFactura(id).subscribe((resultado)=>{
+      console.log(resultado);
+
+    })
+    
   }
 }
