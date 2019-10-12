@@ -25,27 +25,42 @@ export class CrearFacturaComponent implements OnInit {
   ngOnInit() {
    
   }
-  sweetAlertGuardo(){
-    Swal.fire({
-      title: 'Excelente!',
-      text: 'se guardaron los datos correctamente',
-      type: 'success',
-      confirmButtonText: 'Aceptar'
-    }).then((result) => {
-      this._sRouter.navigate(['facturas']);
-    })
-  } 
+  // sweetAlertGuardo(){
+  //   Swal.fire({
+  //     title: 'Excelente!',
+  //     text: 'se guardaron los datos correctamente',
+  //     type: 'success',
+  //     confirmButtonText: 'Aceptar'
+  //   })
+  // } 
   crearFactura(){
-    console.log(this.objFactura);
+    Swal.fire({
+      title:'Espere un momento',
+      text:'Estamos Registrando la Factura',
+      type:'info',
+      allowOutsideClick:false,
+      showConfirmButton:false
+    })
+    
     this.subscriptor=this._sFactura.postFactura(this.objFactura).subscribe((rpta)=>{
-      console.log(rpta);
+      if (rpta.id){
+        // si tiene un campo id asignado implica que el objeto ha sido creado
+        Swal.fire({
+          title:'Éxito',
+          type:'success',
+          text:'La factura ha sido creada con exito mafren',
+          confirmButtonText:'Aceptar',
+          allowOutsideClick:false //no permite que se haga click fuera del alert
+        }).then((result)=>{
+          if (result.value){
+            this._sRouter.navigate(['facturas']);
+          }
+        });
+      }
     });
-    this.sweetAlertGuardo();
-    //this._sRouter.navigate(['facturas']);
+  
   }
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
+  ngOnDestroy() {
     try {
       this.subscriptor.unsubscribe();
     } catch (error) {
@@ -53,5 +68,4 @@ export class CrearFacturaComponent implements OnInit {
     }
   }
   
-
 }
